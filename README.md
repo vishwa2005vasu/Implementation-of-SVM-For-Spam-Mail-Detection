@@ -9,131 +9,74 @@ To write a program to implement the SVM For Spam Mail Detection.
 
 ## Algorithm
 
-
-1.Import the necessary python packages using import statements.
-
-
-2.Read the given csv file using read_csv() method and print the number of contents to be displayed using df.head().
-
-
-3.Split the dataset using train_test_split.
-
-
-4.Calculate Y_Pred and accuracy.
-
-
-5.Print all the outputs.
-
-
-6.End the Program.
-
-
+1. Import the packages.
+2. Analyse the data.
+3. Use modelselection and Countvectorizer to preditct the values.
+4. Find the accuracy and display the result.
 
 ## Program:
-```
+
 /*
+
 Program to implement the SVM For Spam Mail Detection..
-Developed by: Vishwa vasu R
+
+Developed by: vishwa vasu R
+ 
 RegisterNumber: 212222040183
 
+*/
+
+```
+import chardet
+file = "/content/spam.csv"
+with open(file, 'rb') as rawdata:
+    result = chardet.detect(rawdata.read(100000))
+print(result)
+
 import pandas as pd
-data=pd.read_csv("spam.csv",encoding='latin-1')
+data = pd.read_csv("/content/spam.csv", encoding='windows-1252')
+print(data.head())
 
-import chardet 
-file='/content/spam.csv'
-with open(file,'rb') as rawdata:
-  result = chardet.detect(rawdata.read(100000))
-result
+print(data.info())
 
-data.head()
+print(data.isnull().sum())
 
-data.info()
-
-data.isnull().sum()
-
-x=data["v1"].values
-y=data["v2"].values
+x = data["v1"].values
+y = data["v2"].values
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
 
 from sklearn.feature_extraction.text import CountVectorizer
-cv=CountVectorizer()
-
-x_train=cv.fit_transform(x_train)
-x_test=cv.transform(x_test)
+cv = CountVectorizer()
+x_train = cv.fit_transform(x_train)
+x_test = cv.transform(x_test)
 
 from sklearn.svm import SVC
-svc=SVC()
-svc.fit(x_train,y_train)
-
-y_pred=svc.predict(x_test)
-y_pred
+svc = SVC()
+svc.fit(x_train, y_train)
+y_pred = svc.predict(x_test)
+print(y_pred)
 
 from sklearn import metrics
-accuracy=metrics.accuracy_score(y_test,y_pred)
-accuracy
-*/
+accuracy = metrics.accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
 ```
 
 ## Output:
 
+![image](https://github.com/user-attachments/assets/451f3bae-e9f3-4de0-b4d0-dea8e9ec8c6d)
 
+![image](https://github.com/user-attachments/assets/3eb0b426-236e-48ed-9d2a-8c7e90c2825a)
 
-RESULT OUTPUT:
+![image](https://github.com/user-attachments/assets/d7d687c8-75a1-4c5c-b701-96b663fed84e)
 
+![image](https://github.com/user-attachments/assets/32b9cb36-658b-4dbf-a0fd-9accde84fe45)
 
+![image](https://github.com/user-attachments/assets/8c594fbe-c343-41db-a030-0ac8a5491adc)
 
-![Screenshot (101)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/84940cf8-821c-486c-98ae-b16b56a13265)
-
-
-
-
-data.head():
-
-
-
-
-![Screenshot (102)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/372f4fd2-df43-4c04-b8bf-9dfdf21a3784)
-
-
-
-
-
-
-data.info():
-
-
-
-
-![Screenshot (103)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/19150a29-bbb1-4fcb-8929-2d9d81372033)
-
-
-
-
-
-data.isnull().sum():
-
-
-
-
-
-
-![Screenshot (104)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/484bcdfc-f6f8-4beb-a24d-34337dc34766)
-
-
-
-
-
-
-Y_prediction VALUE:
-
-
-
-
-
-
-![Screenshot (106)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/9ceb3368-cb2f-4241-9051-d4dd267cffa7)
+![image](https://github.com/user-attachments/assets/7be7ece2-d1da-4330-adf3-2e76b9e2d71d)
 
 
 
@@ -141,15 +84,8 @@ Y_prediction VALUE:
 
 
 
-ACCURACY VALUE:
 
 
-
-
-
-
-
-![Screenshot (107)](https://github.com/MaheshMuthuL/Implementation-of-SVM-For-Spam-Mail-Detection/assets/135570619/e5ade1dc-bf75-4bab-b17e-249250024c86)
 
 
 
